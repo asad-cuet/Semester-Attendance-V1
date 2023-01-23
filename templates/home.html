@@ -1,8 +1,61 @@
 
 {% extends 'layout.html' %}
  
+{% block head %}
+
+<script>
+    $(document).ready(function(){
+          var cnt=2;
+      $("#add").click(function(){
+          var col="<div id='row"+cnt+"'><br><div class='row'><div class='col'><label for='formFileSm' class='form-label'>Course "+cnt+"</label><input class='form-control form-control-sm' name='file_name[]' type='file'></div></div></div>";
+          $(".box").append(col);
+          cnt++;
+      });
+      $("#remove").click(function(){
+          cnt--;
+          var id="#row"+cnt;
+          $(id).remove();
+      });
+    });
+</script>
+{% endblock %}
+
+
 {% block body %}
  
-<p> This is a home page</p>
+<div class="card">
+    <div class="card-body">
+            <div class="" style="width:100%;max-width:700px;margin:auto">
+                    <h3 class="text-center">Load Attendance Sheet</h3>
+                    <form method="POST" action="">
+
+                    
+                    <div class="box">
+                    
+                        <div id="row1">
+                                <div class="row" >
+                                    <div class="col">
+                                        <label for="formFileSm" class="form-label">Course 1</label>
+                                        <input class="form-control form-control-sm" name="file_name[]" type="file">
+                                    </div>
+                                </div>
+                        </div>
+                    
+                    </div>      
+                    
+                    
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Load</button>
+                    </div>
+                    <br>
+                    </form>
+                    <div class="text-center">
+                        <button class="btn btn-dark" id="add">Append an Input</button> 
+                        <button class="btn btn-danger" id="remove">Remove an Input</button> 
+                    </div>
+            </div>
+    </div>
+  </div>
  
 {% endblock %}
