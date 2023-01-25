@@ -7,7 +7,7 @@
     $(document).ready(function(){
           var cnt=2;
       $("#add").click(function(){
-          var col="<div id='row"+cnt+"'><br><div class='row'><div class='col'><label for='formFileSm' class='form-label'>Course "+cnt+"</label><input class='form-control form-control-sm' name='file_name[]' type='file'></div></div></div>";
+          var col="<div id='row"+cnt+"'><br><div class='row'><div class='col'><label for='formFileSm' class='form-label'>Course "+cnt+"</label><input class='form-control form-control-sm' name='file[]' type='file'></div></div></div>";
           $(".box").append(col);
           cnt++;
       });
@@ -27,16 +27,14 @@
     <div class="card-body">
             <div class="" style="width:100%;max-width:700px;margin:auto">
                     <h3 class="text-center">Load Attendance Sheet</h3>
-                    <form method="POST" action="">
-
-                    
+                    <form method="POST" action="{{ url_for('load_file') }}" enctype="multipart/form-data">
                     <div class="box">
                     
                         <div id="row1">
                                 <div class="row" >
                                     <div class="col">
                                         <label for="formFileSm" class="form-label">Course 1</label>
-                                        <input class="form-control form-control-sm" name="file_name[]" type="file">
+                                        <input class="form-control form-control-sm" name="file[]" id="file" type="file">
                                     </div>
                                 </div>
                         </div>
@@ -51,8 +49,8 @@
                     <br>
                     </form>
                     <div class="text-center">
-                        <button class="btn btn-dark" id="add">Append an Input</button> 
-                        <button class="btn btn-danger" id="remove">Remove an Input</button> 
+                        <button class="btn btn-dark" id="add">Append Course</button> 
+                        <button class="btn btn-danger" id="remove">Remove Course</button> 
                     </div>
             </div>
     </div>
