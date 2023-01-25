@@ -7,13 +7,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
+            <a class="nav-link {% if request.endpoint=='home' %}active{%endif %}" aria-current="page" href="{{ url_for('home') }}">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('loaded_file') }}">Loaded-Attendance</a>
+            <a class="nav-link {% if request.endpoint=='loaded_file' %}active{%endif %}" href="{{ url_for('loaded_file') }}">Loaded-Attendance</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('get_attendance') }}">Find-Attendance</a>
+            <a class="nav-link {% if request.endpoint=='get_attendance' %}active{%endif %}" href="{{ url_for('get_attendance') }}">Find-Attendance</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="demo-download">Demo-Attendance</a>
