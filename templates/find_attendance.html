@@ -1,0 +1,76 @@
+
+{% extends 'layout.html' %}
+ 
+{% block head %}
+
+
+{% endblock %}
+
+
+{% block body %}
+ 
+<div class="card">
+    <div class="card-body">
+            <div class="" style="width:100%;max-width:900px;margin:auto">
+                    <h3 class="text-center">Load Attendance Sheet</h3>
+                    <form method="POST" action="{{ url_for('find_attendance') }}">
+                    <div class="box">
+                    
+                        <div id="row1">
+                                <div class="row" style="width:100%;max-width:400px;margin:auto">
+                                    <div class="col">
+                                        <label for="formFileSm" class="form-label">Student ID</label>
+                                        <input required type="text" placeholder="Enter Student ID" class="form-control form-control-sm" name="student_id">
+                                    </div>
+                                </div>
+                        </div>
+                    
+                    </div>      
+                    
+                    
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Find</button>
+                    </div>
+                    <br>
+                    </form>
+
+
+
+                      {%if attendance%}
+                      <h5 class="m-2" style="font-size:14px">Student ID : {{student_id}}</h5>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Course Code</th>
+                                <th scope="col">Course Title</th>
+                                <th scope="col">Credit</th>
+                                <th scope="col">Total Class</th>
+                                <th scope="col">Present</th>
+                                <th scope="col">Absent</th>
+                                <th scope="col">Present %</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for attend in attendance%}
+                                <tr>
+                                    <td>{{attend['Course Code']}}</td>
+                                    <td>{{attend['Course Title']}}</td>
+                                    <td>{{attend['Credit']}}</td>
+                                    <td>{{attend['Total Class']}}</td>
+                                    <td>{{attend['Present']}}</td>
+                                    <td>{{attend['Absent']}}</td>
+
+                                    <td {% if attend['Present Percentage'] < 60 %} class="text-danger" {% endif %}>
+                                        {{attend['Present Percentage']}} %
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                      {% endif %}
+            </div>
+    </div>
+  </div>
+ 
+{% endblock %}

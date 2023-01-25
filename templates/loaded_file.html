@@ -1,0 +1,48 @@
+
+{% extends 'layout.html' %}
+ 
+{% block head %}
+
+{% endblock %}
+
+
+{% block body %}
+ 
+
+
+
+<div class="card">
+    <div class="card-body">
+            <div class="" style="width:100%;max-width:1000px;margin:auto">
+
+
+                    <div class="container">
+                    {% if files %}
+                        <h5>Uploaded Attendance</h5>
+                        <div class="mt-4">
+                            {% for file in files %}
+                                <a class="btn btn-sm btn-primary m-1"  href="{{file}}">
+                                    {{file.split("\\")[-1:][0]}}
+                                </a>
+                                
+                            {% endfor %}
+                            <a class="btn btn-sm btn-dark  m-1"  href="{{url_for('static', filename='merged file/new_semester.csv')}}">
+                                Semester-Details
+                            </a>
+                            <a class="btn btn-sm btn-danger  m-1" onclick="return confirm('You will lost all uploded file. Are you Sure?')"  href="{{url_for('reset_system')}}">
+                                Reset the System
+                            </a>
+
+                        </div>
+                      
+                    {% else %}
+                        <h2 class="text-center">No File Uploaded</h2>
+                    {% endif %}
+                    </div>
+
+                    
+            </div>
+    </div>
+  </div>
+ 
+{% endblock %}

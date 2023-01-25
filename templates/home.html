@@ -23,6 +23,9 @@
 
 {% block body %}
  
+
+
+
 <div class="card">
     <div class="card-body">
             <div class="" style="width:100%;max-width:700px;margin:auto">
@@ -34,7 +37,7 @@
                                 <div class="row" >
                                     <div class="col">
                                         <label for="formFileSm" class="form-label">Course 1</label>
-                                        <input class="form-control form-control-sm" name="file[]" id="file" type="file">
+                                        <input class="form-control form-control-sm" name="file[]" id="file" type="file" required>
                                     </div>
                                 </div>
                         </div>
@@ -49,8 +52,8 @@
                     <br>
                     </form>
                     <div class="text-center">
-                        <button class="btn btn-dark" id="add">Append Course</button> 
-                        <button class="btn btn-danger" id="remove">Remove Course</button> 
+                        <button class="btn btn-dark m-1" id="add">Append Course</button> 
+                        <button class="btn btn-danger m-1" id="remove">Remove Course</button> 
                     </div>
             </div>
     </div>

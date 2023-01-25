@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 import glob
+global upload_path
+global merge_folder
 upload_path='static/uploaded file/'
 merge_folder='static/merged file/'
 
@@ -95,7 +97,7 @@ def newStudentAttendance():
 def getAttendance(student_id):
     
     #reading new semester dataframe which is saved as csv file
-    new_semester=pd.read_csv("merged file/new_semester.csv")
+    new_semester=pd.read_csv(merge_folder+"new_semester.csv")
     
     #taking all course cose as list
     cource_code=list(new_semester['Cource_Code'])
@@ -106,11 +108,11 @@ def getAttendance(student_id):
     for code in cource_code:
         
         #taking attendance dataframe of this coutce code
-        cource_item_df=pd.read_csv("merged file/"+code+".csv",index_col=0)
+        cource_item_df=pd.read_csv(merge_folder+code+".csv",index_col=0)
 
         #calculating total class, present, absent
         total_class=len(cource_item_df.columns)
-        present=list(cource_item_df.loc[student_id].values).count('P')  
+        present=list(cource_item_df.loc[int(student_id)].values).count('P')  
         absent=total_class-present
 
         #taking course title and credit
@@ -119,7 +121,7 @@ def getAttendance(student_id):
 
         #creating new row of above data
         row_data = [              
-                {'Course Title': course_title,'Course Code': code,'Total Class': total_class,'Present': present,'Absent':absent}
+                {'Course Title': course_title,'Course Code': code,'Credit':credit,'Total Class': total_class,'Present': present,'Absent':absent,'Present Percentage':int(present/total_class*100)}
                ]  
         new_row = pd.DataFrame(row_data)
 
@@ -132,13 +134,26 @@ def getAttendance(student_id):
 
 def clearPath(path):
     file_path = glob.glob(path+'*')
-    try:
-        for f in file_path:
-            os.remove(f)
-        return True
-    except:
-        return False
+    if(len(file_path)):
+        try:
+            for f in file_path:
+                os.remove(f)
+            return True
+        except:
+            return False
+    return True
+    
 
 
 def getExtension(name):
     return os.path.splitext(name)[1]
+
+
+def isLoaded():
+    path = './static/merged file/new_semester.csv'
+    isExist = os.path.exists(path)
+    
+    if(isExist):
+        return True
+    else:
+        return False
