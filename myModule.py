@@ -2,9 +2,9 @@ import pandas as pd
 import os
 import glob
 global upload_path
-global merge_folder
+global merge_path
 upload_path='static/uploaded file/'
-merge_folder='static/merged file/'
+merge_path='static/merged file/'
 
 def getCourseDetails(data):
     
@@ -78,7 +78,7 @@ def mergeUploadedFile(all_uploaded_file):
         details=getCourseDetails(dataset)
         
         #saving the attendance sheet as csv file
-        details['attendance_frame'].to_csv(merge_folder+details['Course_Code']+".csv")
+        details['attendance_frame'].to_csv(merge_path+details['Course_Code']+".csv")
         
         #inserting course information new semester dataframe
         insertToSemester(details)
@@ -97,7 +97,7 @@ def newStudentAttendance():
 def getAttendance(student_id):
     
     #reading new semester dataframe which is saved as csv file
-    new_semester=pd.read_csv(merge_folder+"new_semester.csv")
+    new_semester=pd.read_csv(merge_path+"new_semester.csv")
     
     #taking all course cose as list
     cource_code=list(new_semester['Cource_Code'])
@@ -108,7 +108,7 @@ def getAttendance(student_id):
     for code in cource_code:
         
         #taking attendance dataframe of this coutce code
-        cource_item_df=pd.read_csv(merge_folder+code+".csv",index_col=0)
+        cource_item_df=pd.read_csv(merge_path+code+".csv",index_col=0)
 
         #calculating total class, present, absent
         total_class=len(cource_item_df.columns)

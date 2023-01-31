@@ -10,7 +10,7 @@ import myModule
 app = Flask(__name__)
 app.secret_key = "super secret key"
 upload_path='static/uploaded file/'
-merge_folder='static/merged file/' 
+merge_path='static/merged file/' 
  
 # @app.route("/")
 # def index():
@@ -29,7 +29,7 @@ def load_file():
         res=myModule.clearPath(upload_path)   
         if(res!=True):
             return "Error in clearing uploaded file path" 
-        res=myModule.clearPath(merge_folder)    
+        res=myModule.clearPath(merge_path)    
         if(res!=True):
             return "Error in clearing uploaded file path" 
 
@@ -60,7 +60,7 @@ def load_file():
         
         if(len(uploaded_file_names)):
             new_semester=myModule.mergeUploadedFile(uploaded_file_names)
-            new_semester.to_csv(merge_folder+"new_semester.csv",index=False)
+            new_semester.to_csv(merge_path+"new_semester.csv",index=False)
             flash('System Loaded Successfully','bg-success')
             return redirect(url_for('loaded_file'))
 
@@ -109,7 +109,7 @@ def reset_system():
     res=myModule.clearPath(upload_path)   
     if(res!=True):
         return "Error in clearing uploaded file path" 
-    res=myModule.clearPath(merge_folder)    
+    res=myModule.clearPath(merge_path)    
     if(res!=True):
         return "Error in clearing uploaded file path" 
     flash('System Reseted Successfully','bg-success')
